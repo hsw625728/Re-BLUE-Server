@@ -166,6 +166,28 @@ module.exports = class extends Base {
   }
 
   /**
+   * 取消订单
+   *
+   * @returns {Promise.<bool>}
+   */
+  async cancelAction() {
+    const orderModel = this.model('order');
+    const id = this.post('orderId');
+    console.log("order.js cancelAction() orderId="+id);
+    if (orderModel.updateOrderStatus(id, 101)){
+    console.log("order.js cancelAction() success");
+        return this.success({
+            status:"success"
+        });
+    } else {
+console.log("order.js cancelAction() fail");
+        return this.fail({
+            status:"fail"
+        });
+    }
+  }
+
+  /**
    * 查询物流信息
    * @returns {Promise.<void>}
    */

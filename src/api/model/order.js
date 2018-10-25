@@ -92,6 +92,17 @@ module.exports = class extends think.Model {
   }
 
   /**
+   * 更改订单取消状态
+   * @param orderId
+   * @param OrderStatus
+   * @returns {Promise.<boolean>}
+   */
+  async updateOrderStatus(orderId, OrderStatus = 0) {
+	console.log("model/order.js updateOrderStatus() orderId="+orderId+";OrderStatus="+OrderStatus);
+    return this.where({id: orderId}).limit(1).update({order_status: parseInt(OrderStatus)});
+  }
+
+  /**
    * 根据订单编号查找订单信息
    * @param orderSn
    * @returns {Promise.<Promise|Promise<any>|T|*>}
